@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperShop.Model", "SuperShop.Model\SuperShop.Model.csproj", "{BF29735A-F9E4-4096-A43E-480A80E037A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperShop.Dal", "SuperShop.Dal\SuperShop.Dal.csproj", "{D985F327-2F2F-4881-AF99-59ABFAD79DE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF29735A-F9E4-4096-A43E-480A80E037A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF29735A-F9E4-4096-A43E-480A80E037A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF29735A-F9E4-4096-A43E-480A80E037A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF29735A-F9E4-4096-A43E-480A80E037A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D985F327-2F2F-4881-AF99-59ABFAD79DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D985F327-2F2F-4881-AF99-59ABFAD79DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D985F327-2F2F-4881-AF99-59ABFAD79DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D985F327-2F2F-4881-AF99-59ABFAD79DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44C6F745-D6CE-4F86-A40E-D30AB407E602}
+	EndGlobalSection
+EndGlobal
