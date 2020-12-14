@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SuperShop.Model\SuperShop.Model.csproj" />
+  </ItemGroup>
+
 </Project>
