@@ -9,7 +9,7 @@ namespace SuperShop.UnitTest
 {
     [TestFixture]
     public class Tests
-    {
+    { 
         [Test]
         public async Task Test1()
         {
