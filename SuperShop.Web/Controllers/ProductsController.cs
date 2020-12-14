@@ -12,41 +12,15 @@ namespace SuperShop.Web.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly SuperShopContext context;
-        public ProductsController(SuperShopContext context)
+        private readonly ProductService productService;
+        public ProductsController(ProductService productService)
         {
-            this.context = context;
-
-            //var builder = new DbContextOptionsBuilder<SuperShopContext>();
-            //builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SuperShop;Integrated Security=True");
-            //context = new SuperShopContext(builder.Options);
+            this.productService = productService;
         }
 
         public async Task<IActionResult> Index()
         {
-            ProductService productService = new ProductService();
-            var model = await productService.GetAvailableProductsAsync(context);
-            return View(model);
+            return View(await productService.GetAvailableProductsAsync());
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    base.Dispose(disposing);
-        //    context?.Dispose();
-        //}
-
-        //public async Task<IActionResult> Index2()
-        //{
-        //    var builder = new DbContextOptionsBuilder<SuperShopContext>();
-        //    builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SuperShop;Integrated Security=True");
-
-
-        //    using (var context = new SuperShopContext(builder.Options))
-        //    {
-        //        ProductService productService = new ProductService();
-        //        var model = await productService.GetAvailableProductsAsync2(context);
-        //        return View(model);
-        //    }
-        //}
     }
 }

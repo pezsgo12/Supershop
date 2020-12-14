@@ -11,9 +11,15 @@ namespace SuperShop.Bll
     // POCO
     public class ProductService
     {
-        public async Task<IReadOnlyList<Product>> GetAvailableProductsAsync(SuperShopContext ctx)
+        private readonly SuperShopContext context;
+        public ProductService(SuperShopContext context)
         {
-            var model = await ctx.Products.Where(p => !p.Discontinued).ToListAsync();
+            this.context = context;
+        }
+
+        public async Task<IReadOnlyList<Product>> GetAvailableProductsAsync()
+        {
+            var model = await context.Products.Where(p => !p.Discontinued).ToListAsync();
             return model;
         }
     }
