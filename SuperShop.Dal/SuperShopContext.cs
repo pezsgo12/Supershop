@@ -4,14 +4,17 @@ using System;
 
 namespace SuperShop.Dal
 {
-
-
-
     public class SuperShopContext : DbContext
     {
-        public SuperShopContext(DbContextOptions<SuperShopContext> options) : base(options)
-        {
+        //public SuperShopContext(DbContextOptions<SuperShopContext> options) : base(options)
+        //{
 
+        //}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SuperShop;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

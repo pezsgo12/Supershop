@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SuperShop.Dal;
 using SuperShop.Model;
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,13 @@ namespace SuperShop.Web.Controllers
     public class ProductsController : Controller
     {
         // GET; body={}; url: /Products/Index
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            Product model = new Product
+            using (var ctx = new SuperShopContext())
             {
-                ProductName = "Labda",
-                UnitPrice = 10,
-                UnitsInStock = 1
-            };
-
-            return View(model);
+                var model = await ctx.Products.Where(p=>!p.Discontinued).ToListAsync();
+                return View(model);
+            }
         }
     }
 }
