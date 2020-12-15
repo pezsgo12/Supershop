@@ -24,8 +24,8 @@ namespace SuperShop.UnitTest
                 context.Products.Add(new Model.Product { ProductId = 2, Discontinued = true, Category = temp });
                 context.SaveChanges();
 
-                ProductService productService = new ProductService();
-                var model = await productService.GetAvailableProductsAsync(context);
+                ProductService productService = new ProductService(context);
+                var model = await productService.GetAvailableProductsAsync();
                 Assert.That(model, Is.All.Matches<Model.Product>(p => !p.Discontinued));
                 Assert.That(model.Count == 1);
                 Assert.That(model[0].ProductId == 1);

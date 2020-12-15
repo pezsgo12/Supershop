@@ -27,7 +27,7 @@ namespace SuperShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews(); // Tran
-            services.AddSingleton<ProductService>();
+            services.AddTransient<ProductService>();
             services.AddDbContext<SuperShopContext>(opt => // Scoped; PerRequest
                 opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SuperShop;Integrated Security=True"));
         }
