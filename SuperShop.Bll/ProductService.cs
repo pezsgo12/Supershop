@@ -31,6 +31,13 @@ namespace SuperShop.Bll
             return p;
         }
 
+        public async Task DeleteProductAsync(int productId)
+        {
+            var product = await context.Products.FindAsync(productId);
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<Product> EditProductAsync(Product p)
         {
             // p.ownerid==currentuserID
@@ -47,7 +54,7 @@ namespace SuperShop.Bll
             return model;
         }
 
-        public async Task<Product> GetProduct(int productId)
+        public async Task<Product> GetProductAsync(int productId)
         {
             return await context.Products.FindAsync(productId);
         }

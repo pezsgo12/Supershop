@@ -49,7 +49,7 @@ namespace SuperShop.Web.Controllers
         // /Products/Edit?productId=2001
         public async Task<IActionResult> Edit(int id)
         {
-            var vm = mapper.Map<Models.Products.Edit>(await productService.GetProduct(id));
+            var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
             return View(vm);
         }
 
@@ -57,6 +57,12 @@ namespace SuperShop.Web.Controllers
         public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
             await productService.EditProductAsync(mapper.Map<Product>(editViewModel));
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await productService.DeleteProductAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }
