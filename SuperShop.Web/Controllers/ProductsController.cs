@@ -53,7 +53,7 @@ namespace SuperShop.Web.Controllers
         {
             var categories = await categoryService.GetCategoriesAsync();
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
-            vm.Categories = categories;
+            vm.Categories = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
             return View(vm);
         }
 

@@ -1,4 +1,5 @@
-﻿using SuperShop.Model;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using SuperShop.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,7 @@ namespace SuperShop.Web.Models.Products
         public int UnitsInStock { get; set; }
         public bool Discontinued { get; set; }
         public int CategoryId { get; set; }
-        public IReadOnlyList<Category> Categories { get; set; }
+        public IReadOnlyList<Models.Shared.CategoryViewModel> Categories { get; set; }
+        // public SelectList Categories { get; set; }
     }
 }
