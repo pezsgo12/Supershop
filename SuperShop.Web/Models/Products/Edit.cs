@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SuperShop.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace SuperShop.Web.Models.Products
         public int UnitsInStock { get; set; }
         public bool Discontinued { get; set; }
         public int CategoryId { get; set; }
+        public IReadOnlyList<Category> Categories { get; set; }
     }
 }

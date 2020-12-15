@@ -12,6 +12,7 @@ namespace SuperShop.Bll
         {
             RegisterDataServices.Register(services);
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
     }
 }

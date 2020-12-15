@@ -14,11 +14,13 @@ namespace SuperShop.Web.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
         private readonly IMapper mapper;
-        public ProductsController(IProductService productService, IMapper mapper)
+        public ProductsController(IProductService productService, IMapper mapper, ICategoryService categoryService)
         {
             this.productService = productService;
             this.mapper = mapper;
+            this.categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -49,7 +51,9 @@ namespace SuperShop.Web.Controllers
         // /Products/Edit?productId=2001
         public async Task<IActionResult> Edit(int id)
         {
+            var categories = await categoryService.GetCategoriesAsync();
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
+            vm.Categories = categories;
             return View(vm);
         }
 
