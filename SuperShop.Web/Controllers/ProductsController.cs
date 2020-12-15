@@ -44,5 +44,19 @@ namespace SuperShop.Web.Controllers
             // TODO redirect to EDIT savedProduct.ProductId
             return RedirectToAction(nameof(Index));
         }
+
+        // /Products/Edit/2001
+        // /Products/Edit?productId=2001
+        public async Task<IActionResult> Edit(int id)
+        {
+            var vm = mapper.Map<Models.Products.Edit>(await productService.GetProduct(id));
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit()
+        {
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

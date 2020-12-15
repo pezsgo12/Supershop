@@ -8,5 +8,7 @@ namespace SuperShop.Bll
     {
         Task<IReadOnlyList<Product>> GetAvailableProductsAsync();
         Task<Product> CreateProductAsync(Product p);
+        Task<Product> EditProductAsync(Product p);
+        Task<Product> GetProduct(int productId);
     }
 }

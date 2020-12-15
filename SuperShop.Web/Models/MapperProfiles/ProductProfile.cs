@@ -14,6 +14,8 @@ namespace SuperShop.Web.Models.MapperProfiles
             CreateMap<Product, Models.Products.Index>()
                               .ForMember(vm=>vm.CategoryName, c => c.MapFrom( p=>p.Category.CategoryName ));
             CreateMap<Models.Products.Create, Product>();
+            CreateMap<Models.Products.Edit, Product>();//.ReverseMap();
+            CreateMap<Product, Models.Products.Edit>();
         }
     }
 }

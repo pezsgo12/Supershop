@@ -31,12 +31,25 @@ namespace SuperShop.Bll
             return p;
         }
 
+        public async Task<Product> EditProductAsync(Product p)
+        {
+            // p.ownerid==currentuserID
+            context.Update(p);
+            await context.SaveChangesAsync();
+            return p;
+        }
+
         public async Task<IReadOnlyList<Product>> GetAvailableProductsAsync()
         {
             var model = await context.Products
                                      .Include(p => p.Category)
                                      .Where(p => !p.Discontinued).ToListAsync();
             return model;
+        }
+
+        public async Task<Product> GetProduct(int productId)
+        {
+            return await context.Products.FindAsync(productId);
         }
     }
 }
