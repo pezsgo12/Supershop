@@ -16,7 +16,5 @@ namespace SuperShop.Web.Models.Products
         public int UnitsInStock { get; set; }
         public bool Discontinued { get; set; }
         public int CategoryId { get; set; }
-        public IReadOnlyList<Models.Shared.CategoryViewModel> Categories { get; set; }
-        // public SelectList Categories { get; set; }
     }
 }

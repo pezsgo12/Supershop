@@ -52,8 +52,10 @@ namespace SuperShop.Web.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var categories = await categoryService.GetCategoriesAsync();
+            // ViewBag.Categories = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
+            ViewData["Categories"] = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
+
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
-            vm.Categories = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
             return View(vm);
         }
 
