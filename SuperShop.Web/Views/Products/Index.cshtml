@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SuperShop.Model.Product>
+﻿@model IEnumerable<SuperShop.Web.Models.Products.Index>
 
 
 @{
@@ -16,10 +16,6 @@
     <thead>
         <tr>
             <th>
-                @*HTML-helper*@
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
             <th>
@@ -29,10 +25,7 @@
                 @Html.DisplayNameFor(model => model.UnitsInStock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Discontinued)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
+                @Html.DisplayNameFor(model => model.CategoryName)
             </th>
             <th></th>
         </tr>
@@ -40,9 +33,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
@@ -53,10 +43,7 @@
                 @Html.DisplayFor(modelItem => item.UnitsInStock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Discontinued)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
+                @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

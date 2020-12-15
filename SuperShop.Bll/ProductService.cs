@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SuperShop.Bll
 {
     // POCO
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly SuperShopContext context;
         public ProductService(SuperShopContext context)
@@ -19,7 +19,9 @@ namespace SuperShop.Bll
 
         public async Task<IReadOnlyList<Product>> GetAvailableProductsAsync()
         {
-            var model = await context.Products.Where(p => !p.Discontinued).ToListAsync();
+            var model = await context.Products
+                                     .Include(p => p.Category)
+                                     .Where(p => !p.Discontinued).ToListAsync();
             return model;
         }
     }

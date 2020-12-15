@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuperShop.Bll;
 using SuperShop.Dal;
@@ -12,15 +13,26 @@ namespace SuperShop.Web.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ProductService productService;
-        public ProductsController(ProductService productService)
+        private readonly IProductService productService;
+        private readonly IMapper mapper;
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             this.productService = productService;
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await productService.GetAvailableProductsAsync());
+            var models = await productService.GetAvailableProductsAsync();
+            var viewModels = mapper.Map<List<Models.Products.Index>>(models);
+            //var viewModels = models.Select(m => new Models.Products.Index
+            //                                    {
+            //                                        CategoryName=m.Category.CategoryName,
+            //                                        ProductName = m.ProductName,
+            //                                        UnitPrice = m.UnitPrice,
+            //                                        UnitsInStock = m.UnitsInStock
+            //                                    });
+            return View(viewModels);
         }
     }
 }
