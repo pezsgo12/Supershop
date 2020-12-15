@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuperShop.Bll\SuperShop.Bll.csproj" />
-    <ProjectReference Include="..\SuperShop.Dal\SuperShop.Dal.csproj" />
     <ProjectReference Include="..\SuperShop.Model\SuperShop.Model.csproj" />
   </ItemGroup>
 

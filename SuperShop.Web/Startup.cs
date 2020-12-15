@@ -11,7 +11,10 @@ using SuperShop.Dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+
 
 namespace SuperShop.Web
 {
@@ -24,14 +27,13 @@ namespace SuperShop.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllersWithViews(); 
-            services.AddTransient<IProductService,ProductService>();
-            services.AddDbContext<SuperShopContext>(opt => 
-                opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SuperShop;Integrated Security=True"));
+            services.AddControllersWithViews();
+
+            RegisterBusinessServices.Register(services);
+            // RegisterDataServices.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

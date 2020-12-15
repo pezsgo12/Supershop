@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using SuperShop.Dal;
 using SuperShop.Model;
 using System;
@@ -6,10 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+[assembly: InternalsVisibleTo("SuperShop.UnitTest")]
+
 namespace SuperShop.Bll
 {
     // POCO
-    public class ProductService : IProductService
+    internal class ProductService : IProductService
     {
         private readonly SuperShopContext context;
         public ProductService(SuperShopContext context)

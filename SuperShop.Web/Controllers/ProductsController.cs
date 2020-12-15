@@ -24,15 +24,7 @@ namespace SuperShop.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var models = await productService.GetAvailableProductsAsync();
-            var viewModels = mapper.Map<List<Models.Products.Index>>(models);
-            //var viewModels = models.Select(m => new Models.Products.Index
-            //                                    {
-            //                                        CategoryName=m.Category.CategoryName,
-            //                                        ProductName = m.ProductName,
-            //                                        UnitPrice = m.UnitPrice,
-            //                                        UnitsInStock = m.UnitsInStock
-            //                                    });
-            return View(viewModels);
+            return View(mapper.Map<List<Models.Products.Index>>(models));
         }
     }
 }
