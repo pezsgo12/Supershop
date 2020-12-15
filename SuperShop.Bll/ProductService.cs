@@ -21,6 +21,16 @@ namespace SuperShop.Bll
             this.context = context;
         }
 
+        public async Task<Product> CreateProductAsync(Product p)
+        {
+            // val;
+            p.Discontinued = false;
+            p.UnitsInStock = 0;
+            context.Products.Add(p);
+            await context.SaveChangesAsync();
+            return p;
+        }
+
         public async Task<IReadOnlyList<Product>> GetAvailableProductsAsync()
         {
             var model = await context.Products

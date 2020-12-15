@@ -13,6 +13,7 @@ namespace SuperShop.Web.Models.MapperProfiles
         {
             CreateMap<Product, Models.Products.Index>()
                               .ForMember(vm=>vm.CategoryName, c => c.MapFrom( p=>p.Category.CategoryName ));
+            CreateMap<Models.Products.Create, Product>();
         }
     }
 }

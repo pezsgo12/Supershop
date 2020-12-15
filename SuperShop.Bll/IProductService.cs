@@ -7,5 +7,6 @@ namespace SuperShop.Bll
     public interface IProductService
     {
         Task<IReadOnlyList<Product>> GetAvailableProductsAsync();
+        Task<Product> CreateProductAsync(Product p);
     }
 }

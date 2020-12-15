@@ -26,5 +26,23 @@ namespace SuperShop.Web.Controllers
             var models = await productService.GetAvailableProductsAsync();
             return View(mapper.Map<List<Models.Products.Index>>(models));
         }
+
+        // /Products/Create
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+
+        // form proc.
+        
+        [HttpPost]
+        public async Task<IActionResult> Create(Models.Products.Create createProductViewModel)
+        {
+            var savedProduct = 
+                await productService.CreateProductAsync(mapper.Map<Product>(createProductViewModel));
+            // TODO redirect to EDIT savedProduct.ProductId
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
