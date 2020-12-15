@@ -34,7 +34,7 @@ namespace SuperShop.Bll
         public async Task<Product> EditProductAsync(Product p)
         {
             // p.ownerid==currentuserID
-            context.Update(p);
+            context.Update(p); // Upsert
             await context.SaveChangesAsync();
             return p;
         }

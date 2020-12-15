@@ -54,8 +54,9 @@ namespace SuperShop.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
+            await productService.EditProductAsync(mapper.Map<Product>(editViewModel));
             return RedirectToAction(nameof(Index));
         }
     }
