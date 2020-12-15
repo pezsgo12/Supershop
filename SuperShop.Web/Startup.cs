@@ -30,7 +30,7 @@ namespace SuperShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();//.AddMvc().AddViewOptions(opts => opts.HtmlHelperOptions.ClientValidationEnabled = false);
 
             RegisterBusinessServices.Register(services);
             // RegisterDataServices.Register(services);
