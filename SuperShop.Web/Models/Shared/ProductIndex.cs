@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SuperShop.Web.Models.Products
+namespace SuperShop.Web.Models.Shared
 {
-    public class Index
+    public class ProductIndex
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

@@ -26,7 +26,7 @@ namespace SuperShop.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var models = await productService.GetAvailableProductsAsync();
-            return View(mapper.Map<List<Models.Products.Index>>(models));
+            return View("ProductIndex", mapper.Map<List<Models.Shared.ProductIndex>>(models));
         }
 
         public async Task<IActionResult> Create()

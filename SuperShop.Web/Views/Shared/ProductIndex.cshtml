@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SuperShop.Web.Models.Products.Index>
+﻿@model IEnumerable<SuperShop.Web.Models.Shared.ProductIndex>
 
 
 @{
@@ -9,7 +9,7 @@
 
 <p>
     @*tag-helper*@
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-controller="Products">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -45,8 +45,8 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                 <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> | 
-                 <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                 <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.ProductId">Edit</a> | 
+                 <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.ProductId">Delete</a>
             </td>
         </tr>
 }

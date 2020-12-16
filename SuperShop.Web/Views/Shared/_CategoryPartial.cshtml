@@ -1,9 +1,8 @@
 ﻿@model SuperShop.Web.Models.Shared.IndexCategoryViewModel
 
-<a href="">
+<a asp-route="ProductsByCategoryRoute" asp-route-categoryId="@Model.CategoryId">
     <div class="col-md-3">
         <div>
-            @*<img src="data:image/jpeg;base64,@category.CategoryImage" />*@
             <base64-jpeg image-data="@Model.CategoryImage"></base64-jpeg>
         </div>
         <div>
