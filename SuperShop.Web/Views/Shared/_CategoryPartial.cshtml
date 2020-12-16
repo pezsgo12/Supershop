@@ -1,0 +1,13 @@
+﻿@model SuperShop.Web.Models.Shared.IndexCategoryViewModel
+
+<a href="">
+    <div class="col-md-3">
+        <div>
+            @*<img src="data:image/jpeg;base64,@category.CategoryImage" />*@
+            <base64-jpeg image-data="@Model.CategoryImage"></base64-jpeg>
+        </div>
+        <div>
+            <label>@Model.CategoryName</label>
+        </div>
+    </div>
+</a>

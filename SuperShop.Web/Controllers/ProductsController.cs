@@ -47,10 +47,11 @@ namespace SuperShop.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         public async Task<IActionResult> Edit(int id)
         {
             var categories = await categoryService.GetCategoriesAsync();
-            ViewData["Categories"] = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
+            ViewData["Categories"] = mapper.Map<List<Models.Shared.SelectListCategoryViewModel>>(categories);
 
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
             return View(vm);
@@ -60,7 +61,7 @@ namespace SuperShop.Web.Controllers
         public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
             var categories = await categoryService.GetCategoriesAsync();
-            ViewData["Categories"] = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
+            ViewData["Categories"] = mapper.Map<List<Models.Shared.SelectListCategoryViewModel>>(categories);
 
             if (!ModelState.IsValid)
                 return View(editViewModel);

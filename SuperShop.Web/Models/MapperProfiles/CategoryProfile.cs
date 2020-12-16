@@ -11,7 +11,9 @@ namespace SuperShop.Web.Models.MapperProfiles
     {
         public CategoryProfile()
         {
-            CreateMap<Category, Models.Shared.CategoryViewModel>();
+            CreateMap<Category, Models.Shared.SelectListCategoryViewModel>();
+            CreateMap<Category, Models.Shared.IndexCategoryViewModel>()
+                .ForMember(vm => vm.CategoryImage, c => c.MapFrom(model=>Convert.ToBase64String(model.Picture.Skip(78).ToArray())));
         }
     }
 }
