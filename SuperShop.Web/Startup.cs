@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuperShop.Bll;
 using SuperShop.Dal;
+using SuperShop.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +34,8 @@ namespace SuperShop.Web
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
-                    //.AddViewOptions(o=>o.HtmlHelperOptions.ClientValidationEnabled=false);
+            //.AddViewOptions(o=>o.HtmlHelperOptions.ClientValidationEnabled=false);
+            services.AddScoped<PopulateCategoriesAttribute>();
 
             RegisterBusinessServices.Register(services);
         }
@@ -54,6 +57,8 @@ namespace SuperShop.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+           
 
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

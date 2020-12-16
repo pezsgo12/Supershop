@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SuperShop.Bll;
 using SuperShop.Dal;
 using SuperShop.Model;
+using SuperShop.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,37 +36,27 @@ namespace SuperShop.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateModelFilter]
         public async Task<IActionResult> Create(Models.Products.Create createProductViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(createProductViewModel);
-            }
-
             var savedProduct =
                 await productService.CreateProductAsync(mapper.Map<Product>(createProductViewModel));
             return RedirectToAction(nameof(Index));
         }
 
-
+        [ServiceFilter(typeof(PopulateCategoriesAttribute))]
         public async Task<IActionResult> Edit(int id)
         {
-            var categories = await categoryService.GetCategoriesAsync();
-            ViewData["Categories"] = mapper.Map<List<Models.Shared.SelectListCategoryViewModel>>(categories);
+
 
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
             return View(vm);
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(PopulateCategoriesAttribute)), ValidateModelFilter]
         public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
-            var categories = await categoryService.GetCategoriesAsync();
-            ViewData["Categories"] = mapper.Map<List<Models.Shared.SelectListCategoryViewModel>>(categories);
-
-            if (!ModelState.IsValid)
-                return View(editViewModel);
-
             try
             {
                 await productService.EditProductAsync(mapper.Map<Product>(editViewModel));

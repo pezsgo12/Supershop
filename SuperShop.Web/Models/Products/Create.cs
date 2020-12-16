@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SuperShop.Web.Models.Products
 {
-    public class Create
+    public class Create 
     {
         [DisplayName("Product name")]
         [Required, StringLength(100)]
