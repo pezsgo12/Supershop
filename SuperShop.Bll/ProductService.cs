@@ -40,7 +40,8 @@ namespace SuperShop.Bll
 
         public async Task<Product> EditProductAsync(Product p)
         {
-            // p.ownerid==currentuserID
+            if (p.CategoryId == 1 && p.UnitPrice < 40)
+                throw new Exception("Ez nem stimmel így!");
             context.Update(p); // Upsert
             await context.SaveChangesAsync();
             return p;

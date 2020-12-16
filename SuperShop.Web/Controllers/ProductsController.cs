@@ -29,30 +29,27 @@ namespace SuperShop.Web.Controllers
             return View(mapper.Map<List<Models.Products.Index>>(models));
         }
 
-        // /Products/Create
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-
-        // form proc.
-        
         [HttpPost]
         public async Task<IActionResult> Create(Models.Products.Create createProductViewModel)
         {
-            var savedProduct = 
+            if (!ModelState.IsValid)
+            {
+                return View(createProductViewModel);
+            }
+
+            var savedProduct =
                 await productService.CreateProductAsync(mapper.Map<Product>(createProductViewModel));
-            // TODO redirect to EDIT savedProduct.ProductId
             return RedirectToAction(nameof(Index));
         }
 
-        // /Products/Edit/2001
-        // /Products/Edit?productId=2001
         public async Task<IActionResult> Edit(int id)
         {
             var categories = await categoryService.GetCategoriesAsync();
-            // ViewBag.Categories = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
             ViewData["Categories"] = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
 
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
@@ -62,7 +59,22 @@ namespace SuperShop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
-            await productService.EditProductAsync(mapper.Map<Product>(editViewModel));
+            var categories = await categoryService.GetCategoriesAsync();
+            ViewData["Categories"] = mapper.Map<List<Models.Shared.CategoryViewModel>>(categories);
+
+            if (!ModelState.IsValid)
+                return View(editViewModel);
+
+            try
+            {
+                await productService.EditProductAsync(mapper.Map<Product>(editViewModel));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(editViewModel);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

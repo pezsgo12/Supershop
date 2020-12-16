@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,10 +31,10 @@ namespace SuperShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllersWithViews();//.AddMvc().AddViewOptions(opts => opts.HtmlHelperOptions.ClientValidationEnabled = false);
+            services.AddControllersWithViews();
+                    //.AddViewOptions(o=>o.HtmlHelperOptions.ClientValidationEnabled=false);
 
             RegisterBusinessServices.Register(services);
-            // RegisterDataServices.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
