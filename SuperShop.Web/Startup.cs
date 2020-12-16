@@ -33,7 +33,9 @@ namespace SuperShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddMvcOptions(opts => opts.Filters.Add(new ValidateModelFilterAttribute()));
+
             //.AddViewOptions(o=>o.HtmlHelperOptions.ClientValidationEnabled=false);
             services.AddScoped<PopulateCategoriesAttribute>();
 
@@ -58,7 +60,7 @@ namespace SuperShop.Web
 
             app.UseRouting();
 
-           
+
 
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

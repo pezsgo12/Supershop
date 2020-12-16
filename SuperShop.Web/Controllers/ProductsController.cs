@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SuperShop.Web.Controllers
 {
+
     public class ProductsController : Controller
     {
         private readonly IProductService productService;
@@ -36,7 +37,6 @@ namespace SuperShop.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateModelFilter]
         public async Task<IActionResult> Create(Models.Products.Create createProductViewModel)
         {
             var savedProduct =
@@ -47,14 +47,12 @@ namespace SuperShop.Web.Controllers
         [ServiceFilter(typeof(PopulateCategoriesAttribute))]
         public async Task<IActionResult> Edit(int id)
         {
-
-
             var vm = mapper.Map<Models.Products.Edit>(await productService.GetProductAsync(id));
             return View(vm);
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(PopulateCategoriesAttribute)), ValidateModelFilter]
+        [ServiceFilter(typeof(PopulateCategoriesAttribute), Order = -1)]
         public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
             try
