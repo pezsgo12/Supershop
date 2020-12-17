@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using SuperShop.Bll;
 using SuperShop.Dal;
@@ -53,18 +54,10 @@ namespace SuperShop.Web.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(PopulateCategoriesAttribute), Order = -1)]
+        [BusinessExceptionFilter]
         public async Task<IActionResult> Edit(Models.Products.Edit editViewModel)
         {
-            try
-            {
-                await productService.EditProductAsync(mapper.Map<Product>(editViewModel));
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View(editViewModel);
-            }
-
+            await productService.EditProductAsync(mapper.Map<Product>(editViewModel));
             return RedirectToAction(nameof(Index));
         }
 
