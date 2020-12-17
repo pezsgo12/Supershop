@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SuperShop.Dal;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ namespace SuperShop.Bll
 {
     public static class RegisterBusinessServices
     {
-        public static void Register(IServiceCollection services)
+        public static void Register(IServiceCollection services, IConfiguration configuration)
         {
-            RegisterDataServices.Register(services);
+            RegisterDataServices.Register(services, configuration);
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
         }

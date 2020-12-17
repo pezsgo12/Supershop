@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,13 @@ namespace SuperShop.Dal
 {
     public static class RegisterDataServices
     {
-        public static void Register(IServiceCollection services)
+        public static void Register(IServiceCollection services, IConfiguration configuration)
         {
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<SuperShopContext>(opt =>
-                opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SuperShop;Integrated Security=True"));
+            {
+                opt.UseSqlServer(connectionString);
+            });
         }
     }
 }
