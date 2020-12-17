@@ -33,6 +33,8 @@ namespace SuperShop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
+            services.AddHttpContextAccessor();
+            services.AddSession();
             services.AddControllersWithViews()
                 .AddMvcOptions(opts => opts.Filters.Add(new ValidateModelFilterAttribute()));
 
@@ -69,7 +71,7 @@ namespace SuperShop.Web
             //app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseSession();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

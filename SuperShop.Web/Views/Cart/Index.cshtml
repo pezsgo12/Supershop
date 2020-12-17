@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KeyValuePair<SuperShop.Model.Product,int>>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Product
+            </th>
+            <th>
+               Count
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    @Model.Sum(i=>i.Key.UnitPrice*i.Value) Ft
+</div>
+<div>
+    <a asp-action="Order" class="btn btn-primary">Order</a>
+</div>

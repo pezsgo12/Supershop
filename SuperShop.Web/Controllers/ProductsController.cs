@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -18,12 +19,14 @@ namespace SuperShop.Web.Controllers
     {
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
+        private readonly ICartService cartService;
         private readonly IMapper mapper;
-        public ProductsController(IProductService productService, IMapper mapper, ICategoryService categoryService)
+        public ProductsController(IProductService productService, IMapper mapper, ICategoryService categoryService, ICartService cartService)
         {
             this.productService = productService;
             this.mapper = mapper;
             this.categoryService = categoryService;
+            this.cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
@@ -64,6 +67,12 @@ namespace SuperShop.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await productService.DeleteProductAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> AddToCart(int id, int count)
+        {
+            await cartService.AddAsync(id, count);
             return RedirectToAction(nameof(Index));
         }
     }
