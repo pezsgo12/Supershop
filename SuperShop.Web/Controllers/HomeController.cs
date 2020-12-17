@@ -29,6 +29,7 @@ namespace SuperShop.Web.Controllers
 
         public IActionResult Privacy()
         {
+            throw new Exception("Baj van!!!");
             return View();
         }
 

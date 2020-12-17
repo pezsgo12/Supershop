@@ -54,7 +54,8 @@ namespace SuperShop.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(errorApp => errorApp.UseMiddleware<ErrorHandlerware>());
+                //app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -76,6 +77,19 @@ namespace SuperShop.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+                endpoints.MapControllerRoute(
+                    name: "catRoute",
+                    pattern: "kategoriak/{action=Index}/{id?}",
+                    defaults: new { controller="Categories" }
+                  );
+
+                endpoints.MapControllerRoute(
+                    name: "prodRoute",
+                    pattern: "termekek/{action=Index}/{id?}",
+                    defaults: new { controller="Products" }
+                  );
             });
         }
     }
