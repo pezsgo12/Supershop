@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace SuperShop.Bll
+namespace SuperShop.Web.BusinessServices
 {
     public static class SessionExtensions
     {

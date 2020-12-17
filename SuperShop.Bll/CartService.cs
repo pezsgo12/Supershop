@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using SuperShop.Dal;
+﻿using SuperShop.Dal;
 using SuperShop.Model;
 using System;
 using System.Collections.Generic;
@@ -9,32 +8,32 @@ using System.Threading.Tasks;
 
 namespace SuperShop.Bll
 {
+    //public interface ICart
+    //{
+    //    void Add(int productId, int count);
+    //    void ClearCart();
+    //    IReadOnlyList<CartItem> GetItems();
+    //    CartItem GetItem();
+    //}
+
+    //public class SessionCart : ICart
+    //{
+
+    //}
+
     public class CartService : ICartService
     {
-        private class CartItem
-        {
-            public int ProductId { get; set; }
-            public int Count { get; set; }
-        }
-
-
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private const string cartKey = "cart";
         private readonly SuperShopContext superShopContext;
-
-        public CartService(IHttpContextAccessor httpContextAccessor, SuperShopContext superShopContext)
+        private readonly ICartHandler cartHandler;
+        public CartService(SuperShopContext superShopContext, ICartHandler cartHandler)
         {
-            this.httpContextAccessor = httpContextAccessor;
             this.superShopContext = superShopContext;
+            this.cartHandler = cartHandler;
         }
 
         public async Task AddAsync(int productId, int count)
         {
-            // TODO: Business logic validation: if discontinued=>err
-            // if unitinstock<count => err
-            // if productId invalid
-            var session = httpContextAccessor.HttpContext.Session;
-            var cart = session.GetJson<List<CartItem>>(cartKey) ?? new List<CartItem>();
+            var cart = cartHandler.GetCartItemsFromSession();
             var element = cart.SingleOrDefault(ci => ci.ProductId == productId);
             if (element != null)
             {
@@ -44,16 +43,17 @@ namespace SuperShop.Bll
             {
                 cart.Add(new CartItem { ProductId = productId, Count = count });
             }
-            session.SetJson(cartKey, cart);
+            cartHandler.SetCartIntoSession(cart);
         }
 
+    
 
         public async Task<Order> CreateOrderAsync()
         {
             var order = new Order
             {
                 OrderDate = DateTime.UtcNow
-                // ShopUserId = currentUser??
+                // ShopUserId = httpContextAccessor.HttpContext.User;
             };
             var cartItems = await GetItemsAsync();
             var orderDetails = cartItems.Select(kvp => new OrderDetail
@@ -76,7 +76,7 @@ namespace SuperShop.Bll
 
         public async Task<IReadOnlyDictionary<Product, int>> GetItemsAsync()
         {
-            var cart = httpContextAccessor.HttpContext.Session.GetJson<List<CartItem>>(cartKey);
+            var cart = cartHandler.GetCartItemsFromSession();
             var result = new Dictionary<Product, int>();
             foreach (var item in cart)
             {
@@ -87,7 +87,7 @@ namespace SuperShop.Bll
 
         public async Task EmptyCartAsync()
         {
-            httpContextAccessor.HttpContext.Session.SetJson(cartKey, new List<CartItem>());
+            cartHandler.SetCartIntoSession(new List<CartItem>());
         }
 
     }

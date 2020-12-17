@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuperShop.Bll;
 using SuperShop.Dal;
+using SuperShop.Web.BusinessServices;
 using SuperShop.Web.Filters;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace SuperShop.Web
             services.Configure<MyBusinessConfigOptions>(
                 Configuration.GetSection(MyBusinessConfigOptions.MyBusinessConfigSection));
 
-
+            services.AddTransient<ICartHandler, CartHandler>();
             RegisterBusinessServices.Register(services, Configuration);
         }
 
