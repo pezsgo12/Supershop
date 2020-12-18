@@ -24,6 +24,7 @@ namespace SuperShop.Web.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogWarning("This is some log");
             return View();
         }
 
