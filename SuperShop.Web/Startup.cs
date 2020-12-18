@@ -49,6 +49,7 @@ namespace SuperShop.Web
             services.AddTransient<ICartHandler, CartHandler>();
             RegisterBusinessServices.Register(services, Configuration);
 
+            // services.AddScoped<MyUserStore, IUserStore<ShopUser>>();
             services.AddIdentity<ShopUser, IdentityRole>().AddEntityFrameworkStores<SuperShopContext>();
             services.Configure<IdentityOptions>(opts =>
             {
@@ -57,6 +58,12 @@ namespace SuperShop.Web
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireNonAlphanumeric = false;
+            });
+            services.ConfigureApplicationCookie(opts =>
+            {
+                opts.LoginPath = "/Account/Login";
+                opts.AccessDeniedPath = "/Account/Login";
+                //opts.ReturnUrlParameter = "ReturnUrl";
             });
         }
 
@@ -81,7 +88,7 @@ namespace SuperShop.Web
 
             app.UseRouting();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSession();

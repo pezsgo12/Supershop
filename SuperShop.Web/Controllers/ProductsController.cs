@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 namespace SuperShop.Web.Controllers
 {
 
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductService productService;

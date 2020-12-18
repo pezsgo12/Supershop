@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SuperShop.Bll;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace SuperShop.Web.Controllers
             return View(cartData);
         }
 
+        [Authorize(Roles = "user")]
         public async Task<IActionResult> Order()
         {
             var t = await cartService.CreateOrderAsync();
