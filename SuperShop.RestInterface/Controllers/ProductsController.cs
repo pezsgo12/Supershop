@@ -38,7 +38,7 @@ namespace SuperShop.RestInterface.Controllers
             var product = mapper.Map<Product>(dto);
             product = await productService.CreateProductAsync(product);
             // return Ok();
-            return Created("/api/Products/", product);
+            return Created("/api/Products/", mapper.Map<ProductDto>(product));
         }
     }
 }
