@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SuperShop.Bll;
 using SuperShop.Dal;
+using SuperShop.Model;
 using SuperShop.Web.BusinessServices;
 using SuperShop.Web.Filters;
 using System;
@@ -46,6 +48,16 @@ namespace SuperShop.Web
 
             services.AddTransient<ICartHandler, CartHandler>();
             RegisterBusinessServices.Register(services, Configuration);
+
+            services.AddIdentity<ShopUser, IdentityRole>().AddEntityFrameworkStores<SuperShopContext>();
+            services.Configure<IdentityOptions>(opts =>
+            {
+                opts.Password.RequireDigit = false;
+                opts.Password.RequiredLength = 1;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireNonAlphanumeric = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

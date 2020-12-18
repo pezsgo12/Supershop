@@ -12,9 +12,9 @@ namespace SuperShop.Bll
         public static void Register(IServiceCollection services, IConfiguration configuration)
         {
             RegisterDataServices.Register(services, configuration);
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IProductService, ProductService>()
+                    .AddTransient<ICategoryService, CategoryService>()
+                    .AddTransient<ICartService, CartService>();
         }
     }
 }
