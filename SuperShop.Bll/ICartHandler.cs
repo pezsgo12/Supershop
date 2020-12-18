@@ -6,5 +6,6 @@ namespace SuperShop.Bll
     {
         List<CartItem> GetCartItemsFromSession();
         void SetCartIntoSession(List<CartItem> cart);
+        
     }
 }

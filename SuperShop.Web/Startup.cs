@@ -46,7 +46,8 @@ namespace SuperShop.Web
             services.Configure<MyBusinessConfigOptions>(
                 Configuration.GetSection(MyBusinessConfigOptions.MyBusinessConfigSection));
 
-            services.AddTransient<ICartHandler, CartHandler>();
+            services.AddTransient<ICartHandler, CartHandler>()
+                    .AddTransient<IUserIdProvider, UserIdProvider>();
             RegisterBusinessServices.Register(services, Configuration);
 
             // services.AddScoped<MyUserStore, IUserStore<ShopUser>>();

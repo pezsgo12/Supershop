@@ -23,7 +23,7 @@ namespace SuperShop.Web.Controllers
             return View(cartData);
         }
 
-        [Authorize(Roles = "user")]
+        [Authorize]
         public async Task<IActionResult> Order()
         {
             var t = await cartService.CreateOrderAsync();

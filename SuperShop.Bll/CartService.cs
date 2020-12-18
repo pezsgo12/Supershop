@@ -25,10 +25,14 @@ namespace SuperShop.Bll
     {
         private readonly SuperShopContext superShopContext;
         private readonly ICartHandler cartHandler;
-        public CartService(SuperShopContext superShopContext, ICartHandler cartHandler)
+        private readonly IUserIdProvider userIdProvider;
+        public CartService(SuperShopContext superShopContext, 
+                           ICartHandler cartHandler, 
+                           IUserIdProvider userIdProvider)
         {
             this.superShopContext = superShopContext;
             this.cartHandler = cartHandler;
+            this.userIdProvider = userIdProvider;
         }
 
         public async Task AddAsync(int productId, int count)
@@ -52,8 +56,8 @@ namespace SuperShop.Bll
         {
             var order = new Order
             {
-                OrderDate = DateTime.UtcNow
-                // ShopUserId = httpContextAccessor.HttpContext.User;
+                OrderDate = DateTime.UtcNow,
+                ShopUserId = userIdProvider.GetCurrentUserId()
             };
             var cartItems = await GetItemsAsync();
             var orderDetails = cartItems.Select(kvp => new OrderDetail
